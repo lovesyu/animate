@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: relative;
+      /*left: 100px;*/
+    }
+  </style>
+</head>
+<body>
+<button id="btn">匀速动画</button>
+<div id="box"></div>
+<script>
+  var btn = document.getElementById('btn');
+  var box = document.getElementById('box');
+
+  var offsetX = 0;
+  var timer = null;
+
+  // 防止定时器叠加
+  btn.onclick = function () {
+    clearInterval(timer);
+
+    timer = setInterval(function () {
+      offsetX += 7;
+      if (offsetX >= 800) {
+        // 定时器清空之后就不能再次开启了
+        clearInterval(timer);
+        console.log('清空定时器');
+        // 设置目标值
+        offsetX = 800;
+      }
+      console.log(offsetX);
+      box.style.left = offsetX + 'px';
+
+    }, 10);
+  }
+</script>
+</body>
+</html>
